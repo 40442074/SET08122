@@ -12,13 +12,22 @@ void code ()
 
 int main ()
 {
-    clock_t t;
-    printf ("start : %d \n", (int)(t = clock() ));
+    double timeAvrg;
 
-    code();
+    int runs = 10;
+    for (int i = 0; i < runs; i++)
+    {
+        clock_t t = clock();
 
-    printf ("stop : %d \n", (int)(t = clock() -t));
-    printf ("Elapsed : %f seconds \n", (double)t / CLOCKS_PER_SEC);
+        code();
+
+        printf ("clocks : %d \n", (int)(t = clock() -t));
+        timeAvrg += t;
+    }
+
+    timeAvrg /= runs;
+
+    printf ("Average time to run: %f seconds", timeAvrg / CLOCKS_PER_SEC);
 
     return 0;
 }
